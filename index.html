@@ -45,7 +45,16 @@
   .total { font-weight: 700; }
   .el { cursor: help; border-bottom: 1px dotted var(--muted); }
   .rules { color: var(--muted); font-size: 13px; }
-  .rules li { margin: 2px 0; }
+  .rules { font-size: 14px; color: var(--text); }
+  .rules h2 { font-size: 18px; margin-bottom: 12px; }
+  .rules h3 { font-size: 15px; margin: 20px 0 8px; color: var(--accent); }
+  .rules li { margin: 4px 0; }
+  .rules ul ul { margin-top: 4px; }
+  .rules dt { font-weight: 700; margin-top: 10px; }
+  .rules dd { margin: 2px 0 0 0; color: var(--muted); }
+  .rules p { color: var(--muted); }
+  table.ex { width: auto; min-width: 100%; }
+  table.ex td, table.ex th { padding: 6px 10px; }
   .status { padding: 24px; text-align: center; color: var(--muted); }
   .err { color: #cf222e; }
   h2 { font-size: 15px; margin: 0 0 8px; }
@@ -69,16 +78,89 @@
   <div id="skip"></div>
 
   <div class="card rules">
-    <strong>Ranking rules</strong>
+    <h2>Ranking kaise hoti hai</h2>
+
+    <h3>1. Shabdon ka matlab</h3>
+    <dl>
+      <dt>CAGR (Compound Annual Growth Rate)</dt>
+      <dd>Fund ne har saal average kitna return diya. Jaise 5Y CAGR 15% matlab pichhle 5 saal mein paisa
+        har saal ~15% ki speed se badha (₹1 lakh lagbhag ₹2 lakh ban gaya). <b>Zyada CAGR = acha.</b>
+        Ye NAV (ek unit ki keemat) se nikala jata hai: aaj ka NAV vs 5 saal pehle ka NAV.</dd>
+
+      <dt>Exit Load</dt>
+      <dd>Agar aap paisa jaldi nikalte ho to fund jo penalty kaatta hai. Jaise "1% &lt; 365d" matlab
+        1 saal ke andar nikala to 1% kategi; ₹1,00,000 nikale to ₹1,000 kat jayenge. 1 saal ke baad koi charge nahi.
+        "(10% free)" matlab har saal 10% units bina charge ke nikal sakte ho. "Nil" matlab koi exit load nahi.
+        <b>Kam exit load = acha.</b></dd>
+
+      <dt>Expense Ratio</dt>
+      <dd>Fund ko chalane ki saalana fees, jo har saal aapke paise mein se chupchap kat jati hai. Jaise 0.75% matlab
+        ₹1 lakh par saal ka ~₹750. Ye har saal lagta hai, isliye lambe samay mein bada farak padta hai.
+        <b>Kam expense ratio = acha.</b></dd>
+
+      <dt>Direct Plan + Growth</dt>
+      <dd><b>Direct</b> plan mein koi distributor/agent commission nahi hota, isliye expense ratio Regular plan se kam hota hai.
+        <b>Growth</b> option mein munafa wapas fund mein lag jata hai (compounding), payout nahi hota.</dd>
+
+      <dt>Min SIP</dt>
+      <dd>Har mahine kam se kam kitne rupaye ki SIP shuru kar sakte ho.</dd>
+    </dl>
+
+    <h3>2. Ranking ke steps</h3>
+    <ol>
+      <li><b>Category choose karo:</b> Large Cap, Mid Cap ya Small Cap.</li>
+      <li><b>Fund list:</b> us category ke saare <b>Direct Plan + Growth</b> funds liye jaate hain (AMFI ki official list se).</li>
+      <li><b>Har fund ke 3 rank banaye jaate hain:</b>
+        <ul>
+          <li><b>CAGR rank:</b> sabse zyada CAGR wala = rank 1.</li>
+          <li><b>Exit load rank:</b> sabse kam exit load wala = rank 1. Pehle % dekha jata hai (kam acha); % same ho to
+            period (chhota acha, jaise 30 din &lt; 1 saal); vo bhi same ho to free units (zyada acha). Nil sabse upar.
+            Agar do level ka load ho (jaise 30 din tak 0.25%, 90 din tak 0.10%) to zyada wala % aur lamba period liya jata hai.</li>
+          <li><b>Expense ratio rank:</b> sabse kam expense ratio wala = rank 1.</li>
+        </ul>
+      </li>
+      <li><b>Total = CAGR rank + Exit load rank + Expense ratio rank.</b></li>
+      <li><b>Final rank:</b> jiska Total sabse kam, vo rank 1 (best). Rank jitna chhota utna acha, isliye teeno ka jod bhi
+        jitna chhota, fund utna balanced aur acha. Top 3 funds peele (highlight) dikhte hain.</li>
+    </ol>
+
+    <h3>3. Example</h3>
+    <div class="scroll"><table class="ex">
+      <thead><tr><th class="l">Fund</th><th>CAGR</th><th>Exit load</th><th>Exp ratio</th><th>CAGR rank</th><th>Exit load rank</th><th>Exp ratio rank</th><th>Total</th><th>Final</th></tr></thead>
+      <tbody>
+        <tr><td class="l">Fund A</td><td>18%</td><td>1% &lt; 365d</td><td>0.60%</td><td>1</td><td>3</td><td>1</td><td><b>5</b></td><td><b>1</b></td></tr>
+        <tr><td class="l">Fund B</td><td>15%</td><td>0.5% &lt; 30d</td><td>0.80%</td><td>2</td><td>1</td><td>3</td><td><b>6</b></td><td><b>2</b></td></tr>
+        <tr><td class="l">Fund C</td><td>12%</td><td>1% &lt; 90d</td><td>0.70%</td><td>3</td><td>2</td><td>2</td><td><b>7</b></td><td><b>3</b></td></tr>
+      </tbody>
+    </table></div>
+    <p>Fund A ka total sabse kam (1+3+1 = 5) hai, isliye vo best hai, chahe uska exit load sabse zyada hai.
+      Matlab kisi ek cheez mein sabse acha hona kaafi nahi hai, teeno cheezein milakar dekhi jaati hain.</p>
+
+    <h3>4. Barabari (tie) ho to</h3>
     <ul>
-      <li>Sirf <b>Direct Plan + Growth</b> funds (AMFI official category list). Index funds is category mein nahi aate.</li>
-      <li><b>CAGR</b> = NAV aaj vs 5 saal pehle (mfapi.in). Zyada = acha. Fund 5 saal purana nahi to <b>3Y</b>, woh bhi nahi to <b>1Y</b> CAGR liya jata hai (<span style="color:var(--warn)">orange</span> mein). Ye 5Y se barabar comparison nahi hai. 1 saal se naye fund rank nahi hote.</li>
-      <li><b>Exit Load</b>: pehle % kam, phir period chhota, phir free units zyada = acha. Nil sabse acha.</li>
-      <li><b>Expense Ratio</b>: kam = acha.</li>
-      <li>Tie ho to same rank (1, 1, 3). <b>Total = teeno ranks ka sum</b>, sabse kam total = best. Total tie ho to zyada CAGR wala upar.</li>
+      <li>Do funds ki value same ho to dono ko <b>same rank</b> milta hai, aur agla rank skip hota hai: <b>1, 1, 3</b>
+        (2 nahi). Jaise do funds ka exit load dono "1% &lt; 365d" hai to dono ka exit load rank same hoga.</li>
+      <li>Do funds ka <b>Total same</b> ho to dono ko same final rank milta hai; table mein <b>zyada CAGR wala upar</b> dikhta hai.</li>
+    </ul>
+
+    <h3>5. Naye aur khaas funds</h3>
+    <ul>
+      <li>5 saal purana fund: <b>5Y</b> CAGR. 3 se 5 saal: <b>3Y</b> CAGR. 1 se 3 saal: <b>1Y</b> CAGR.
+        3Y/1Y <span style="color:var(--warn)">orange</span> mein dikhte hain, kyunki ye 5Y se barabar ka comparison nahi hai.
+        Ek accha saal hone se naya fund upar aa sakta hai, isliye orange wale dhyan se dekho.</li>
+      <li>1 saal se naye funds rank nahi hote; ye neeche "Rank nahi hue" table mein reason ke saath dikhte hain.</li>
+      <li>Jis fund ka expense ratio ya exit load nahi mila, vo bhi rank nahi hota.</li>
+      <li>Index funds (jaise Nifty Smallcap 250 Index Fund) is list mein nahi aate; AMFI unhe alag category mein rakhta hai.</li>
+      <li>Band ya merge ho chuke funds (jinka NAV 30 din se update nahi hua) aur IDCW/dividend plans hata diye jaate hain.</li>
+    </ul>
+
+    <h3>6. Data aur zaroori baatein</h3>
+    <ul>
+      <li><b>Min SIP</b> aur <b>Min Lumpsum</b> sirf jaankari ke liye hain, ranking mein nahi gine jaate.</li>
+      <li>Fund list: AMFI. NAV / CAGR: mfapi.in. Exit load, expense ratio, min SIP: Groww ka public data (Kuvera backup).</li>
       <li>Online version ka data roz raat ~9:30 baje (IST) apne aap update hota hai.</li>
-      <li>Min SIP sirf info ke liye hai, ranking mein nahi gina jata.</li>
-      <li>Exit load / expense ratio / min SIP Groww ke public data se aate hain; invest karne se pehle fund ki site par confirm kar lena. Ye investment advice nahi hai.</li>
+      <li>Pichhla return aage ke return ki guarantee nahi hai. Invest karne se pehle fund ki site par details confirm kar lena.
+        <b>Ye investment advice nahi hai.</b></li>
     </ul>
   </div>
 </div>
